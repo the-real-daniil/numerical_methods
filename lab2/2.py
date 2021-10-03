@@ -4,7 +4,6 @@ from sympy.plotting import plot
 
 x = symbols('x')
 f = diff(log(x, 10), x, 3)
-print(f)
 # plot(f, (x, 1, 100))
 
 
@@ -20,7 +19,7 @@ def interpolation_error(x, arr_x, n, maxx):
 
 
 arr_x = [1, 10, 100]
-maxx = lambdify(x, f)(1)   # максимум функции lg(x) на моем отрезке от 1 до 100
+maxx = lambdify(x, f)(1)   # максимум 3-ей производной функции lg(x) на моем отрезке от 1 до 100
 n = len(arr_x)
 x = 50
 print(maxx)

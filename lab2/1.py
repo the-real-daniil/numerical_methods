@@ -1,4 +1,6 @@
-from sympy import Symbol, pprint, sympify
+from sympy import Symbol, pprint, sympify, lambdify
+import matplotlib.pyplot as plt
+import numpy as np
 
 
 def lagrange(arr_x, arr_y):
@@ -13,8 +15,15 @@ def lagrange(arr_x, arr_y):
     return expr
 
 
-x_arr = [-3, 2, 5]
-y_arr = [30, 5, 14]
+x_arr = np.array([-3, 2, 5])
+y_arr = np.array([30, 5, 14])
 f = lagrange(x_arr, y_arr).simplify()
 pprint(f)
 
+x = Symbol('x')
+x_range = np.linspace(-3, 5, 100)
+func = lambdify(x, f)
+y = func(x_range)
+
+plt.plot(x_range, y, x_arr, y_arr)
+plt.show()
