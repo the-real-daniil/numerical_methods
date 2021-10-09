@@ -39,22 +39,22 @@ x_arr = np.array([8, 11, 14, 17, 20, 23, 26, 29])
 y_arr = np.array([3, 7, 11, 17, 20, 20, 21, 22])
 h = 3
 
+if __name__ == '__main__':
+    table = create_table(y_arr)
+    print(table)
+    polynomial = newton_polynomial_backward(table, x_arr, h).simplify()
+    pprint(polynomial)
 
-table = create_table(y_arr)
-print(table)
-polynomial = newton_polynomial_backward(table, x_arr, h).simplify()
-pprint(polynomial)
+    # интерполирующая функция
+    x = Symbol('x')
+    func = lambdify(x, polynomial)
+    x_range = np.linspace(8, 29, 100)
+    y_range = func(x_range)
 
-# интерполирующая функция
-x = Symbol('x')
-func = lambdify(x, polynomial)
-x_range = np.linspace(8, 29, 100)
-y_range = func(x_range)
+    # точка x со звездочкой
+    x_star = 22
+    y_star = polynomial.subs(x, x_star)
+    print(y_star)
 
-# точка x со звездочкой
-x_star = 22
-y_star = polynomial.subs(x, x_star)
-print(y_star)
-
-plt.plot(x_arr, y_arr, 'ro', x_range, y_range, x_star, y_star, 'b*')
-plt.show()
+    plt.plot(x_arr, y_arr, 'ro', x_range, y_range, x_star, y_star, 'b*')
+    plt.show()
