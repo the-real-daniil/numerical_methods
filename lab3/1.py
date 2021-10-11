@@ -27,6 +27,7 @@ print('Exact root: ', root)
 
 # находит корни методом Ньютона с погрешностью EPS
 def solve_by_newton_method(expr, a, b):
+    counter = 0
     f = lambdify(x, expr)
     df = lambdify(x, diff(expr))
     x0 = uniform(a, b)
@@ -36,11 +37,13 @@ def solve_by_newton_method(expr, a, b):
         x0 = b
     x1 = x0 - f(x0)/df(x0)
     while abs(x1 - x0) >= EPS:
+        counter += 1
         x0 = x1
         x1 = x0 - f(x0) / df(x0)
-    return x1
+    return x1, counter
 
 
-newton_root = solve_by_newton_method(expr, 0.1, 10)
+newton_root, count = solve_by_newton_method(expr, 0.1, 10)
 print('Newton root: ', newton_root)
 print('Error value: ', abs(root - newton_root))
+print('Iterations count: ', count)
