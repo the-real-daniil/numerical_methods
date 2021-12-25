@@ -3,7 +3,6 @@
 from sympy.solvers import solve
 from sympy import Symbol, diff
 from sympy.utilities.lambdify import lambdify
-from random import uniform
 import numpy as np
 import matplotlib.pyplot as plt
 
